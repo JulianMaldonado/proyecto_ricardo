@@ -1,0 +1,628 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sistemaventas;
+import java.awt.*;
+import javax.swing.*;
+import java.sql.*;
+import javax.swing.DefaultComboBoxModel;
+import Conexion.ConexionMySQL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+/**
+ *
+ * @author JULIAN
+ */
+public class modifica_empleados extends javax.swing.JInternalFrame {
+   DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+    String id;
+    
+    DefaultComboBoxModel modelociudad = new DefaultComboBoxModel();
+     String idciudad;
+     
+     DefaultComboBoxModel modelocargo = new DefaultComboBoxModel();
+     String idcargo;
+     
+    DefaultComboBoxModel modelotipo = new DefaultComboBoxModel();
+     String idtipo;
+    
+     
+    
+    
+   CallableStatement cts;
+   ResultSet r;
+   Connection cn;
+   conexion conectar=new conexion();
+
+    /**
+     * Creates new form modifica_empleados
+     */
+    public modifica_empleados() {
+        initComponents();
+       cn=conectar.conectado();
+       lbldepto.setVisible(false);
+       lblcargo.setVisible(false);
+       lbltipo.setVisible(false);
+       llena_empleados();
+       llenarciudad();
+       llenacargos();
+       llenar_combo();
+       
+       
+       
+       
+    }
+    
+    
+    void llena_empleados() {
+            try {
+    
+            ConexionMySQL mysql = new ConexionMySQL();
+            Connection cn = mysql.Conectar();
+                
+                
+           PreparedStatement pstmt = null;
+            ResultSet rs = null;
+            String llenar_empleados="select id_empleado, CONCAT (em_nombre,'',em_apellido,'',user) as detalle  from empleado ";             
+                      
+                
+pstmt = cn.prepareStatement(llenar_empleados);
+rs = pstmt.executeQuery();
+modeloCombo.addElement(new mcombos("VER EMPLEADOS","0"));
+cboempleados.setModel(modeloCombo);
+while (rs.next()) 
+{
+    modeloCombo.addElement(new mcombos(rs.getString("detalle"),rs.getString("id_empleado"))); //aca meto el id q jalo con mcombos
+   //  cbocargo.setModel(modeloCombo);
+       }
+}
+catch(Exception e) {}
+            
+   //hay q declarar antes  DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel(); en la parte de clases publicas
+            
+  }  
+    
+    
+    void llenarciudad(){
+          
+
+ try {
+    
+            ConexionMySQL mysql = new ConexionMySQL();
+            Connection cn = mysql.Conectar();
+                
+                
+           PreparedStatement pstmt = null;
+            ResultSet rs = null;
+            String llenarciudad="select id_ciudad, descripcion as detalle  from ciudad ";             
+                      
+                
+pstmt = cn.prepareStatement(llenarciudad);
+rs = pstmt.executeQuery();
+modelociudad.addElement(new mcombos("VER DEPARTAMENTOS","0"));
+cbodepto.setModel(modelociudad);
+while (rs.next()) 
+{
+    modelociudad.addElement(new mcombos(rs.getString("detalle"),rs.getString("id_ciudad"))); //aca meto el id q jalo con mcombos
+   //  cbocargo.setModel(modeloCombo);
+       }
+}
+catch(Exception e) {}
+            
+   //hay q declarar antes  DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel(); en la parte de clases publicas
+    
+ 
+ 
+ 
+ 
+ }
+    
+    void llenacargos(){
+        
+try {
+    
+            ConexionMySQL mysql = new ConexionMySQL();
+            Connection cn = mysql.Conectar();
+                
+                
+           PreparedStatement pstmt = null;
+            ResultSet rs = null;
+            String llenarciudad="select id_cargo, descripcion as detalle  from cargo_empleado ";             
+                      
+                
+pstmt = cn.prepareStatement(llenarciudad);
+rs = pstmt.executeQuery();
+modelocargo.addElement(new mcombos("VER CARGOS","0"));
+cbocargo.setModel(modelocargo);
+while (rs.next()) 
+{
+    modelocargo.addElement(new mcombos(rs.getString("detalle"),rs.getString("id_cargo"))); //aca meto el id q jalo con mcombos
+   //  cbocargo.setModel(modeloCombo);
+       }
+}
+catch(Exception e) {}
+            
+   //hay q declarar antes  DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel(); en la parte de clases publicas
+    
+ 
+ 
+    }    
+    
+    
+    void llenar_combo() {
+         
+        modelociudad.removeAllElements();
+        modelocargo.removeAllElements();
+        modelotipo.removeAllElements();
+        
+       modelotipo.addElement(new mcombos("SELECCIONE TIPO USER","-1"));  
+       modelotipo.addElement(new mcombos("ADMINISTRADOR","0"));
+       modelotipo.addElement(new mcombos("VENDEDOR","1"));
+       cbotipo.setModel(modelotipo);
+        
+    }
+    
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        cboempleados = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtApellidos = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
+        txtDPI = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtuser = new javax.swing.JTextField();
+        txtdireccion = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cbodepto = new javax.swing.JComboBox();
+        cbocargo = new javax.swing.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtclave = new javax.swing.JTextField();
+        cbotipo = new javax.swing.JComboBox();
+        jLabel13 = new javax.swing.JLabel();
+        btmodifica = new javax.swing.JButton();
+        lbldepto = new javax.swing.JLabel();
+        lblcargo = new javax.swing.JLabel();
+        lbltipo = new javax.swing.JLabel();
+
+        cboempleados.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        cboempleados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccion" }));
+        cboempleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboempleadosActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setText("Apellidos:");
+
+        jLabel3.setText("Nombres:");
+
+        jLabel5.setText("DPI:");
+
+        jLabel7.setText("Telefono:");
+
+        jLabel8.setText("Usuario:");
+
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyTyped(evt);
+            }
+        });
+
+        txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombresKeyTyped(evt);
+            }
+        });
+
+        txtDPI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDPIActionPerformed(evt);
+            }
+        });
+        txtDPI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDPIKeyTyped(evt);
+            }
+        });
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+
+        txtdireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdireccionKeyTyped(evt);
+            }
+        });
+
+        jLabel9.setText("Direccion:");
+
+        jLabel10.setText("Departamento:");
+
+        cbodepto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbodepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbodeptoActionPerformed(evt);
+            }
+        });
+
+        cbocargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbocargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbocargoActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Cargo:");
+
+        jLabel12.setText("Clave:");
+
+        cbotipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbotipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbotipoActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setText("Nivel User:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbotipo, 0, 320, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtclave))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbocargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbodepto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTelefono))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtApellidos)
+                            .addComponent(txtNombres)
+                            .addComponent(txtDPI, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtuser, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtdireccion)))
+                .addGap(21, 21, 21))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDPI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cbodepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cbocargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        btmodifica.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btmodifica.setText("MODIFICAR");
+        btmodifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmodificaActionPerformed(evt);
+            }
+        });
+
+        lbldepto.setText("depto");
+
+        lblcargo.setText("cargo");
+
+        lbltipo.setText("tipo");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cboempleados, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btmodifica)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(lbldepto)
+                .addGap(27, 27, 27)
+                .addComponent(lblcargo)
+                .addGap(18, 18, 18)
+                .addComponent(lbltipo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btmodifica)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cboempleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbldepto)
+                    .addComponent(lblcargo)
+                    .addComponent(lbltipo))
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void cboempleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboempleadosActionPerformed
+        mcombos mcombos1 =(mcombos) cboempleados.getSelectedItem(); //esto es por el mcombos
+        id = mcombos1.getID();
+
+        btmodifica.setEnabled(true);
+
+        this.txtNombres.setEnabled(true);
+        this.txtApellidos.setEnabled(true);
+        this.txtdireccion.setEnabled(true);
+        this.txtTelefono.setEnabled(true);
+        this.txtDPI.setEnabled(true);
+        this.cbodepto.setEnabled(true);
+        this.cbocargo.setEnabled(true);
+        this.txtuser.setEnabled(true);
+        this.txtclave.setEnabled(true);
+        this.cbotipo.setEnabled(true);
+
+        this.txtNombres.requestFocus();
+
+        //JOptionPane.showMessageDialog(null,id);
+        JOptionPane.showMessageDialog(null,id,"EL PROVEEDOR A EDITAR ES EL NUMERO:",JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_cboempleadosActionPerformed
+
+    private void txtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyTyped
+        // TODO add your handling code here:
+        char car=evt.getKeyChar();
+        if((car<'a'||car>'z')&&(car<'A'||car>'Z')&&(car<' '||car>' ')) evt.consume();
+
+    }//GEN-LAST:event_txtApellidosKeyTyped
+
+    private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
+        // TODO add your handling code here:
+        char car=evt.getKeyChar();
+        if((car<'a'||car>'z')&&(car<'A'||car>'Z')&&(car<' '||car>' ')) evt.consume();
+
+    }//GEN-LAST:event_txtNombresKeyTyped
+
+    private void txtDPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDPIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDPIActionPerformed
+
+    private void txtDPIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDPIKeyTyped
+        // TODO add your handling code here:
+        char car=evt.getKeyChar();
+        if(  txtDPI.getText().length()>=8)evt.consume();
+        if((car<'0' || car>'9') ) evt.consume();
+    }//GEN-LAST:event_txtDPIKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+        char car=evt.getKeyChar();
+        if(  txtTelefono.getText().length()>=9)evt.consume();
+        if((car<'0' || car>'9') ) evt.consume();
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtdireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdireccionKeyTyped
+
+    private void cbodeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbodeptoActionPerformed
+        // TODO add your handling code here:
+        mcombos mcombos1 =(mcombos) cbodepto.getSelectedItem(); //esto es por el mcombos
+        idciudad = mcombos1.getID();
+        String id = mcombos1.getID();
+        lbldepto.setText(id);
+
+    }//GEN-LAST:event_cbodeptoActionPerformed
+
+    private void cbocargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbocargoActionPerformed
+        // TODO add your handling code here:
+        mcombos mcombos1 =(mcombos) cbocargo.getSelectedItem(); //esto es por el mcombos
+        idcargo = mcombos1.getID();
+
+        String id = mcombos1.getID();
+        lblcargo.setText(id);
+    }//GEN-LAST:event_cbocargoActionPerformed
+
+    private void cbotipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbotipoActionPerformed
+        // TODO add your handling code here:
+        mcombos mcombos1 =(mcombos) cbotipo.getSelectedItem(); //esto es por el mcombos
+        idtipo = mcombos1.getID();
+
+        String id = mcombos1.getID();
+        lbltipo.setText(id);
+    }//GEN-LAST:event_cbotipoActionPerformed
+
+    private void btmodificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmodificaActionPerformed
+        // TODO add your handling code here:
+ ConexionMySQL mysql = new ConexionMySQL(); //abre la conecxion
+        Connection cn = mysql.Conectar(); //abre la conecxion
+        
+         String nom=txtNombres.getText(); 
+         String apellido=txtApellidos.getText(); 
+         String direc=txtdireccion.getText(); 
+         String tel=txtTelefono.getText(); 
+         String dpi=txtDPI.getText(); 
+         String idciu=lbldepto.getText();
+         String idcar=lblcargo.getText();
+         String user=txtuser.getText(); 
+         String clave=txtclave.getText(); 
+         String idtip=lbltipo.getText();
+  
+        
+        try {
+            
+            
+         
+          
+    if(  !nom.equals("") && !apellido.equals("") && !direc.equals("") && !tel.equals("") &&! dpi.equals("") &&!user.equals("") &&!clave.equals("") &&!idciu.equals("") &&!idcar.equals("") &&!idtip.equals(""))   
+                //enviar datos a validar
+            
+                                    
+	                        {
+	                         
+                                    
+    cts=cn.prepareCall("{ call modifica_empleado(?,?,?,?,?,?,?,?,?,?,?)}");
+            
+            cts.setString(1, id);
+            cts.setString(2, nom);
+            cts.setString(3, apellido);
+            cts.setString(4, direc);
+            cts.setString(5, tel);
+            cts.setString(6, dpi);
+            cts.setString(7, idciu);
+            cts.setString(8, idcar);
+            cts.setString(9, user);
+            cts.setString(10, clave);
+            cts.setString(11, idtip);
+           
+            
+                     
+            
+            
+            int rpta=cts.executeUpdate();
+            if(rpta==1)
+                JOptionPane.showMessageDialog(this,"CLIENTE REGISTRADO CORRECTAMENTE!!","Atencion",JOptionPane.INFORMATION_MESSAGE);
+     
+                                }
+            
+            else
+            
+                            {
+	                        JOptionPane.showMessageDialog(null, "Debe llenar todos los campos que tengan (*) .\n" +
+	                            "NO puede dejar ningun campo vacio");
+                                                             
+	                    }
+        
+            
+           
+        } catch (SQLException | HeadlessException e) {
+            Logger.getLogger(Empleados.class.getName()).log(Level.SEVERE, null, e);
+        }
+              
+        
+        
+   
+    
+        
+        
+
+    }//GEN-LAST:event_btmodificaActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btmodifica;
+    private javax.swing.JComboBox cbocargo;
+    private javax.swing.JComboBox cbodepto;
+    private javax.swing.JComboBox cboempleados;
+    private javax.swing.JComboBox cbotipo;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblcargo;
+    private javax.swing.JLabel lbldepto;
+    private javax.swing.JLabel lbltipo;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtDPI;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtclave;
+    private javax.swing.JTextField txtdireccion;
+    private javax.swing.JTextField txtuser;
+    // End of variables declaration//GEN-END:variables
+}
