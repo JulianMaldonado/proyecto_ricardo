@@ -66,6 +66,7 @@ this.lblhora.setText(hora);
         pasteMenuItem = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -240,6 +241,14 @@ this.lblhora.setText(hora);
             }
         });
         editMenu.add(jMenuItem14);
+
+        jMenuItem15.setText("Compra");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItem15);
 
         menuBar.add(editMenu);
 
@@ -660,6 +669,16 @@ this.lblhora.setText(hora);
        }catch(Exception e){}
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+        try{
+        Compra em = new Compra();
+        jDesktopPane1.add(em);
+        em.show();
+        em.setLocation(50, 10);
+       }catch(Exception e){}
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -724,6 +743,7 @@ this.lblhora.setText(hora);
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
