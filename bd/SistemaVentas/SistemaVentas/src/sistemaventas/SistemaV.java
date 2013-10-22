@@ -28,9 +28,9 @@ public class SistemaV extends javax.swing.JFrame {
     CallableStatement cst;
     ResultSet r;
     public SistemaV() {
-        initComponents();
+    initComponents();
       
- Calendar cal=Calendar.getInstance();
+Calendar cal=Calendar.getInstance();
  String fecha=cal.get(Calendar.DATE)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(cal.YEAR);
 String hora=cal.get(cal.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(cal.SECOND); 
 this.lblfecha.setText(fecha); 
